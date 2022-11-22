@@ -37,13 +37,12 @@ class plgSystemGoogleTagManager extends JPlugin {
 		// Check to see if we are in the admin and if we should track
 		$trackadmin = $this->params->get('trackadmin','');
 		$mainframe = JFactory::getApplication();
-		if($mainframe->isAdmin() && ($trackadmin != 'on')) {
+		if($mainframe->isClient('administrator')  && ($trackadmin != 'on')) {
 			return;
 			}
 		
 		// Get the Body of the HTML - have to do this twice to get the HTML
-		$buffer = JResponse::getBody();
-		$buffer = JResponse::getBody();
+		$buffer = $mainframe->getBody();
 		// Get our Container ID and Track Admin parameter
 		$container_id = $this->params->get('container_id','');
 		$addDataLayer = $this->params->get('add_datalayer','');
@@ -82,7 +81,7 @@ height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript>
 		// update to limit = 1 to add tag to only the first <body.*> tag
 		$buffer = preg_replace ("/(<body.*?>)/is", "$1".$gtm_iframe_container_code, $buffer, 1);
 		
-		JResponse::setBody($buffer);
+		$mainframe->setBody($buffer);
 		
 		return true;
 		}

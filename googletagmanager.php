@@ -31,9 +31,9 @@ class plgSystemGoogleTagManager extends JPlugin {
 
 	function onAfterRender() {
 		// don't run if we are in the index.php or we are not in an HTML view
-		if(strpos($_SERVER["PHP_SELF"], "index.php") === false || JRequest::getVar('format','html') != 'html'){
-			return;
-			}
+		//~ if(strpos($_SERVER["PHP_SELF"], "index.php") === false || JRequest::getVar('format','html') != 'html'){
+			//~ return;
+			//~ }
 		// Check to see if we are in the admin and if we should track
 		$trackadmin = $this->params->get('trackadmin','');
 		$mainframe = JFactory::getApplication();
